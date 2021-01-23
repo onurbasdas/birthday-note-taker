@@ -34,9 +34,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func saveClicked(_ sender: Any) {
-        
-        UserDefaults.standard.set(nameTextField.text!, forKey: "name")
-        UserDefaults.standard.set(birthdayTextField.text!, forKey: "birthday")
+        if nameTextField.text == ""{
+           makeAlert(titleInput: "Error", messageInput: "Username Not Found")
+        }else{
+            UserDefaults.standard.set(nameTextField.text!, forKey: "name")
+        }
+        if birthdayTextField.text == ""{
+            makeAlert(titleInput: "Error", messageInput: "Birthday Not Found")
+        }else{
+            UserDefaults.standard.set(birthdayTextField.text!, forKey: "birthday")
+        }
+       
+       
         //      UserDefaults.standard.synchronize() Karşımıza böyle de çıkabilir.
         
         
@@ -61,6 +70,13 @@ class ViewController: UIViewController {
         }
         
         
+    }
+    
+    func makeAlert(titleInput: String, messageInput: String){
+        let alert = UIAlertController(title: titleInput, message: messageInput, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil)
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
